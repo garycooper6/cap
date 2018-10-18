@@ -1,3 +1,7 @@
+## How to Initialse to GIT
+
+Create the Repository (instructions on how to link are inluded after creation)
+
 # Cap
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.4.

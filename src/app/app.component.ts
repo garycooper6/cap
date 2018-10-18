@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'cap';
+  pageTitle = 'Commercial Application Portal';
 }
 
 const test = 'test';

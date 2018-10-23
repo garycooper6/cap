@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IContract } from './contract';
+import { ContractService } from './contract.service';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -24,32 +25,9 @@ export class ContractListComponent implements OnInit {
     }
 
     filteredContracts: IContract[];
-    contracts: IContract[] = [
-        {
-            'contractId': 1,
-            'contractNumber': 790,
-            'details': 'Moorgate Tunnel cleaning',
-            'status': '0',
-            'tenderValue': 175819.51,
-            'startDate': '09/02/2015',
-            'starRating': 2.8,
-            'imageUrl': 'https://openclipart.org/image/800px/svg_to_png/158773/Boton-correcto.png'
-        },
-        {
-            'contractId': 2,
-            'contractNumber': 802,
-            'details': 'Manningtree Station',
-            'status': '0',
-            'tenderValue': 1748529.80,
-            'startDate': '04/08/2015',
-            'starRating': 1.6,
-            'imageUrl': 'https://openclipart.org/download/158779/Boton-mal.svg'
-        }
-    ];
+    contracts: IContract[] = [];
 
-    constructor() {
-        this.filteredContracts = this.contracts;
-        this.listFilter = 'station';
+    constructor(private contractService: ContractService) {
     }
 
     performFilter(filterBy: string): IContract[] {
@@ -63,7 +41,8 @@ export class ContractListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        console.log('In OnInit');
+        this.contracts = this.contractService.getContracts();
+        this.filteredContracts = this.contracts;
     }
 
     onRatingClicked(message: string): void {

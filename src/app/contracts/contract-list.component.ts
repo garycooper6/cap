@@ -32,6 +32,7 @@ export class ContractListComponent implements OnInit {
             'status': '0',
             'tenderValue': 175819.51,
             'startDate': '09/02/2015',
+            'starRating': 2.8,
             'imageUrl': 'https://openclipart.org/image/800px/svg_to_png/158773/Boton-correcto.png'
         },
         {
@@ -41,6 +42,7 @@ export class ContractListComponent implements OnInit {
             'status': '0',
             'tenderValue': 1748529.80,
             'startDate': '04/08/2015',
+            'starRating': 1.6,
             'imageUrl': 'https://openclipart.org/download/158779/Boton-mal.svg'
         }
     ];
@@ -62,5 +64,9 @@ export class ContractListComponent implements OnInit {
 
     ngOnInit(): void {
         console.log('In OnInit');
+    }
+
+    onRatingClicked(message: string): void {
+        this.pageTitle = 'Contract List: ' + message;
     }
 }

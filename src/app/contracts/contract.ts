@@ -5,5 +5,6 @@ export interface IContract {
     status: string;
     tenderValue: number;
     startDate: string;
+    starRating: number;
     imageUrl: string;
 }

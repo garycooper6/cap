@@ -1,7 +1,7 @@
 <div class="ui segment">
-    <h1 class="ui header">
+    <div class="ui header">
         {{pageTitle}}
-    </h1>
+    </div>
     <div class="ui grid">
         <div class="row">
             <div class="two wide column">Filter by:</div>
@@ -28,6 +28,7 @@
                 <th>Status</th>
                 <th>Tender Value</th>
                 <th>Start Date</th>
+                <th>Rating</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,9 @@
                 <td>{{contract.status | statusConverter: '0'}}</td>
                 <td>{{contract.tenderValue | currency:'GBP'}}</td>
                 <td>{{contract.startDate | date:'mediumDate'}}</td>
+                <td>
+                    <cap-star [rating]="contract.starRating" (ratingClicked)="onRatingClicked($event)"></cap-star>
+                </td>
             </tr>
         </tbody>
     </table>

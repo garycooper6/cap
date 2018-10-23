@@ -14,6 +14,7 @@ export class ContractListComponent implements OnInit {
     imageWidth = 50;
     imageMargin = 2;
     showImage = false;
+    errorMessage: string;
 
     _listFilter: string;
     get listFilter(): string {
@@ -41,8 +42,13 @@ export class ContractListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.contracts = this.contractService.getContracts();
-        this.filteredContracts = this.contracts;
+        this.contractService.getContracts().subscribe(
+            contracts => {
+                this.contracts = contracts;
+                this.filteredContracts = this.contracts;
+            },
+            error => this.errorMessage = <any>error
+        );
     }
 
     onRatingClicked(message: string): void {

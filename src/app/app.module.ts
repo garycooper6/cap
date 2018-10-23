@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ContractListComponent } from './contracts/contract-list.component';
+import { StatusConverterPipe } from './shared/status-converter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContractListComponent
+    ContractListComponent,
+    StatusConverterPipe
   ],
   imports: [
     BrowserModule,

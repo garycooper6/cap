@@ -2,7 +2,7 @@ export interface IContract {
     contractId: number;
     contractNumber: number;
     details: string;
-    status: number;
+    status: string;
     tenderValue: number;
     startDate: string;
     imageUrl: string;

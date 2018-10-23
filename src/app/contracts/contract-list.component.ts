@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { IContract } from './contract';
 
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'cap-contracts',
-    templateUrl: './contract-list.component.html'
+    templateUrl: './contract-list.component.html',
+    styleUrls: ['./contract-list.component.css']
 })
 
-export class ContractListComponent {
+export class ContractListComponent implements OnInit {
     pageTitle = 'Contract List';
     imageWidth = 50;
     imageMargin = 2;
     showImage = false;
     listFilter = 'station';
-    contracts: any[] = [
+    contracts: IContract[] = [
         {
             'contractId': 1,
             'contractNumber': 790,
@@ -35,5 +37,9 @@ export class ContractListComponent {
 
     toggleImage(): void {
         this.showImage = !this.showImage;
+    }
+
+    ngOnInit(): void {
+        console.log('In OnInit');
     }
 }

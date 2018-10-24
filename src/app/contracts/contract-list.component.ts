@@ -3,8 +3,6 @@ import { IContract } from './contract';
 import { ContractService } from './contract.service';
 
 @Component({
-    // tslint:disable-next-line:component-selector
-    selector: 'cap-contracts',
     templateUrl: './contract-list.component.html',
     styleUrls: ['./contract-list.component.css']
 })

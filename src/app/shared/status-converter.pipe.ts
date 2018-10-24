@@ -13,5 +13,4 @@ export class StatusConverterPipe implements PipeTransform {
 
         return value.replace(character, converted);
     }
-
 }

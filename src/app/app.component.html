@@ -1,7 +1,14 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div>
-  <h1>
-    Welcome to {{ pageTitle }}!
-  </h1>
-  <cap-contracts></cap-contracts>
+<div class="ui container">
+  <div class="ui large pointing menu">
+    <div class="header item">
+      {{ pageTitle }}
+    </div>
+    <a class="item" [routerLink]="['/welcome']" routerLinkActive="router-link-active">
+      Home
+    </a>
+    <a class="item" [routerLink]="['/contracts']">
+      Contracts List
+    </a>
+  </div>
 </div>
+<router-outlet></router-outlet>

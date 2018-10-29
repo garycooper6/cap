@@ -36,7 +36,9 @@
                 <tr *ngFor="let contract of filteredContracts">
                     <td><img *ngIf="showImage" [src]="contract.imageUrl" [title]="contract.contractNumber"
                             [style.width.px]='imageWidth' [style.margin.px]='imageMargin'></td>
-                    <td>{{contract.contractNumber}}</td>
+                    <td>
+                        <a [routerLink]="['/contracts', contract.contractId]"> {{contract.contractNumber}}</a>
+                    </td>
                     <td>{{contract.details}}</td>
                     <td>{{contract.status | statusConverter: '0'}}</td>
                     <td>{{contract.tenderValue | currency:'GBP'}}</td>

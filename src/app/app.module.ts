@@ -10,6 +10,7 @@ import { StatusConverterPipe } from './shared/status-converter.pipe';
 import { StarComponent } from './shared/star.component';
 import { ContractDetailComponent } from './contracts/contract-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
+import { ContractDetailGuard } from './contracts/contract-detail.guard';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,11 @@ import { WelcomeComponent } from './home/welcome.component';
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'contracts', component: ContractListComponent },
-      { path: 'contracts/:id', component: ContractDetailComponent },
+      {
+        path: 'contracts/:id',
+        canActivate: [ContractDetailGuard],
+        component: ContractDetailComponent
+      },
       { path: 'welcome', component: WelcomeComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }

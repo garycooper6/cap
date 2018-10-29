@@ -3,6 +3,38 @@
     {{pageTitle + ': ' + contract.details}}
   </h3>
 
+  <div class="ui basic segment">
+    <div class="row">
+      <div class="ui two column celled grid">
+        <div class="row">
+          <div class="four wide column">Contract:</div>
+          <div class="eight wide column">{{contract.contractNumber}}</div>
+        </div>
+        <div class="row">
+          <div class="four wide column">Details:</div>
+          <div class="eight wide column">{{contract.details}}</div>
+        </div>
+        <div class="row">
+          <div class="four wide column">Status:</div>
+          <div class="eight wide column">{{contract.status | statusConverter: '0'}}</div>
+        </div>
+        <div class="row">
+          <div class="four wide column">Tender Value:</div>
+          <div class="eight wide column">{{contract.tenderValue | currency:'GBP'}}</div>
+        </div>
+        <div class="row">
+          <div class="four wide column">Start Date:</div>
+          <div class="eight wide column">{{contract.startDate | date:'mediumDate'}}</div>
+        </div>
+        <div class="row">
+          <div class="four wide column">Rating:</div>
+          <div class="eight wide column">{{contract.starRating }}</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </div>
 <div class="ui segement">
   <div class="= ui block footer">

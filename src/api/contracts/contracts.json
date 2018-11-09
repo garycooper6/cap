@@ -1,6 +1,6 @@
 [
     {
-        "contractId": 1,
+        "id": 1,
         "contractNumber": 790,
         "details": "Moorgate Tunnel cleaning",
         "status": "0",
@@ -10,7 +10,7 @@
         "imageUrl": "https://openclipart.org/image/800px/svg_to_png/158773/Boton-correcto.png"
     },
     {
-        "contractId": 2,
+        "id": 2,
         "contractNumber": 802,
         "details": "Manningtree Station",
         "status": "0",
@@ -20,7 +20,7 @@
         "imageUrl": "https://openclipart.org/download/158779/Boton-mal.svg"
     },
     {
-        "contractId": 3,
+        "id": 3,
         "contractNumber": 850,
         "details": "Velmore Bishopstoke 33kv UTX",
         "status": "0",
@@ -30,7 +30,7 @@
         "imageUrl": "https://openclipart.org/download/158779/Boton-mal.svg"
     },
     {
-        "contractId": 4,
+        "id": 4,
         "contractNumber": 852,
         "details": "Royal Mint Gardens Survey Works",
         "status": "0",

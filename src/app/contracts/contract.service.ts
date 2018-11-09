@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IContract } from './contract';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
 @Injectable({
@@ -19,11 +19,26 @@ export class ContractService {
         );
     }
 
-    getContract(id: number): Observable<IContract | undefined> {
+    getContract(id: number): Observable<IContract> {
+        if (id === 0) {
+            return of(this.initializeContract());
+        }
         return this.getContracts().pipe(
-            map((products: IContract[]) => products.find(p => p.contractId === id))
+            map((contracts: IContract[]) => contracts.find(p => p.id === id))
         );
     }
+
+    // getContract(id: number): Observable<IContract> {
+    //     if (id === 0) {
+    //         return of(this.initializeContract());
+    //     }
+    //     const url = `${this.contractUrl}/${id}`;
+    //     return this.http.get<IContract>(url)
+    //         .pipe(
+    //             tap(data => console.log('getContract: ' + JSON.stringify(data))),
+    //             catchError(this.handleError)
+    //         );
+    // }
 
     private handleError(err: HttpErrorResponse) {
         let errorMessage = '';
@@ -34,5 +49,20 @@ export class ContractService {
         }
         console.error(errorMessage);
         return throwError(errorMessage);
+    }
+
+    private initializeContract(): IContract {
+        // Return an initialized object
+        return {
+            id: 0,
+            contractNumber: null,
+            details: null,
+            status: null,
+            tenderValue: null,
+            startDate: null,
+            starRating: null,
+            imageUrl: null,
+            tags: ['']
+        };
     }
 }

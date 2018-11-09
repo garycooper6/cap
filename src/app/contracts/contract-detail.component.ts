@@ -16,7 +16,7 @@ export class ContractDetailComponent implements OnInit {
     private contractService: ContractService) { }
 
   ngOnInit() {
-    const param = +this.route.snapshot.paramMap.get('id');
+    const param = this.route.snapshot.paramMap.get('id');
     if (param) {
       const id = +param;
       this.getContract(id);

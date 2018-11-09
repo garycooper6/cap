@@ -1,46 +1,65 @@
-<div class="ui segment" *ngIf="contract">
-  <h3 class="ui block header">
-    {{pageTitle + ': ' + contract.details}}
-  </h3>
+<div class="card">
+  <div class="card-header" *ngIf="contract">
+    {{pageTitle + ": " + contract.contractNumber}}
+  </div>
 
-  <div class="ui basic segment">
+  <div class="card-body" *ngIf="contract">
+
     <div class="row">
-      <div class="ui two column celled grid">
+
+      <div class="col-md-8">
         <div class="row">
-          <div class="four wide column">Contract:</div>
-          <div class="eight wide column">{{contract.contractNumber}}</div>
+          <div class="col-md-3">Contract:</div>
+          <div class="col-md-6">{{contract.contractNumber}}</div>
         </div>
         <div class="row">
-          <div class="four wide column">Details:</div>
-          <div class="eight wide column">{{contract.details}}</div>
+          <div class="col-md-3">Details:</div>
+          <div class="col-md-6">{{contract.details}}</div>
         </div>
         <div class="row">
-          <div class="four wide column">Status:</div>
-          <div class="eight wide column">{{contract.status | statusConverter: '0'}}</div>
+          <div class="col-md-3">Status:</div>
+          <div class="col-md-6">{{contract.status | statusConverter: '0'}}</div>
         </div>
         <div class="row">
-          <div class="four wide column">Tender Value:</div>
-          <div class="eight wide column">{{contract.tenderValue | currency:'GBP'}}</div>
+          <div class="col-md-3">Tender Value:</div>
+          <div class="col-md-6">{{contract.tenderValue | currency:'GBP'}}</div>
         </div>
         <div class="row">
-          <div class="four wide column">Start Date:</div>
-          <div class="eight wide column">{{contract.startDate | date:'mediumDate'}}</div>
+          <div class="col-md-3">Start Date:</div>
+          <div class="col-md-6">{{contract.startDate | date:'mediumDate'}}</div>
         </div>
         <div class="row">
-          <div class="four wide column">Rating:</div>
-          <div class="eight wide column">{{contract.starRating }}</div>
+          <div class="col-md-3">5 Star Rating:</div>
+          <div class="col-md-6">
+            <cap-star [rating]="contract.starRating">
+            </cap-star>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">Tags:</div>
+          <div class="col-md-6">{{contract.tags}}</div>
         </div>
       </div>
 
+      <div class="col-md-4" *ngIf="contract.imageUrl">
+        <img class="center-block img-responsive" [style.height.px]="150" [style.margin.px]="2" [src]="contract.imageUrl"
+          [title]="contract.contractNumber">
+      </div>
     </div>
+
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <button class="btn btn-outline-secondary mr-3" style="width:80px" (click)="onBack()">
+          <i class="fa fa-chevron-left"></i> Back
+        </button>
+        <button class="btn btn-outline-primary" style="width:80px" [routerLink]="['/contracts', contract.id, 'edit']">
+          Edit
+        </button>
+      </div>
+    </div>
+
   </div>
 
-</div>
-<div class="ui segement">
-  <div class="= ui block footer">
-    <button class="ui labeled icon button" (click)='onBack()'>
-      <i class="angle left icon"></i>
-      Back
-    </button>
+  <div class="alert alert-danger" *ngIf="errorMessage">{{errorMessage}}
   </div>
 </div>

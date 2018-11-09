@@ -1,58 +1,73 @@
-<div class="ui container">
-    <div class="ui segment">
-        <h3 class="ui block header">
-            {{pageTitle}}
-        </h3>
-        <div class="ui grid">
-            <div class="row">
-                <div class="two wide column">Filter by:</div>
-                <div class="four wide column">
-                    <div class="ui left corner labeled input">
-                        <input type="text" [(ngModel)]="listFilter" placeholder="Search...">
-                        <div class="ui left corner label">
-                            <i class="asterisk icon"></i>
-                        </div>
-                    </div>
+<div class="card">
+    <div class="card-header">
+        {{pageTitle}}
+    </div>
+
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">Filter by:</div>
+            <div class="input-group col-md-4">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">@</span>
                 </div>
-            </div>
-            <div class="row">
-                <div class="six wide column">
-                    <h4>Filtered by: {{listFilter}}</h4>
-                </div>
+                <input type="text" [(ngModel)]="listFilter" placeholder="Search..."
+                    aria-describedby="basic-addon1" />
             </div>
         </div>
-        <table class="ui table" *ngIf='contracts && contracts.length'>
-            <thead>
-                <tr>
-                    <th>
-                        <button class="ui primary button" (click)='toggleImage()'>
-                            {{showImage ? 'Hide':'Show'}} Image
-                        </button>
-                    </th>
-                    <th>Contract</th>
-                    <th>Details</th>
-                    <th>Status</th>
-                    <th>Tender Value</th>
-                    <th>Start Date</th>
-                    <th>Rating</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let contract of filteredContracts">
-                    <td><img *ngIf="showImage" [src]="contract.imageUrl" [title]="contract.contractNumber"
-                            [style.width.px]='imageWidth' [style.margin.px]='imageMargin'></td>
-                    <td>
-                        <a [routerLink]="['/contracts', contract.contractId]"> {{contract.contractNumber}}</a>
-                    </td>
-                    <td>{{contract.details}}</td>
-                    <td>{{contract.status | statusConverter: '0'}}</td>
-                    <td>{{contract.tenderValue | currency:'GBP'}}</td>
-                    <td>{{contract.startDate | date:'mediumDate'}}</td>
-                    <td>
-                        <cap-star [rating]="contract.starRating" (ratingClicked)="onRatingClicked($event)"></cap-star>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="row" *ngIf="listFilter">
+            <div class="col-md-6">
+                <h4>Filtered by: {{listFilter}}</h4>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table mb-0" *ngIf="contracts && contracts.length">
+                <thead>
+                    <tr>
+                        <th>
+                            <button class="btn btn-outline-primary btn-sm" (click)="toggleImage()">
+                                {{showImage ? "Hide" : "Show"}} Image
+                            </button>
+                        </th>
+                        <th>Contract</th>
+                        <th>Details</th>
+                        <th>Status</th>
+                        <th>Tender Value</th>
+                        <th>Start Date</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let contract of filteredContracts">
+                        <td>
+                            <img *ngIf="showImage && contract.imageUrl" [src]="contract.imageUrl" [title]="contract.contractNumber"
+                                [style.width.px]="imageWidth" [style.margin.px]="imageMargin">
+                        </td>
+                        <td>
+                            <a [routerLink]="['/contracts', contract.id]">
+                                {{ contract.contractNumber }}
+                            </a>
+                        </td>
+                        <td>{{contract.details}}</td>
+                        <td>{{contract.status | statusConverter: '0'}}</td>
+                        <td>{{contract.tenderValue | currency:'GBP'}}</td>
+                        <td>{{contract.startDate | date:'mediumDate'}}</td>
+                        <td>
+                            <cap-star [rating]="contract.starRating" (ratingClicked)="onRatingClicked($event)"></cap-star>
+                        </td>
+                        <td>
+                            <button class="btn btn-outline-primary btn-sm" [routerLink]="['/contracts', contract.id, 'edit']">
+                                Edit
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+    Error: {{ errorMessage }}
 </div>

@@ -5,9 +5,16 @@ import { StatusConverterPipe } from '../shared/status-converter.pipe';
 import { RouterModule } from '@angular/router';
 import { ContractDetailGuard } from './contract-detail.guard';
 import { SharedModule } from '../shared/shared.module';
+import { ContractEditComponent } from './contract-edit.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ContractEditGuard } from './contract-edit.guard';
+
+
 
 @NgModule({
   imports: [
+    SharedModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       { path: 'contracts', component: ContractListComponent },
       {
@@ -15,13 +22,14 @@ import { SharedModule } from '../shared/shared.module';
         canActivate: [ContractDetailGuard],
         component: ContractDetailComponent
       },
-    ]),
-    SharedModule
+      { path: 'contracts/:id/edit', canDeactivate: [ContractEditGuard], component: ContractEditComponent }
+    ])
   ],
   declarations: [
     ContractListComponent,
     ContractDetailComponent,
-    StatusConverterPipe
+    StatusConverterPipe,
+    ContractEditComponent
   ]
 })
 export class ContractModule { }

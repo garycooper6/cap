@@ -1,5 +1,5 @@
 export interface IContract {
-    contractId: number;
+    id: number;
     contractNumber: number;
     details: string;
     status: string;
@@ -7,4 +7,5 @@ export interface IContract {
     startDate: string;
     starRating: number;
     imageUrl: string;
+    tags?: string[];
 }

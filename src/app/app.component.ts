@@ -8,5 +8,3 @@ import { Component } from '@angular/core';
 export class AppComponent {
   pageTitle = 'Commercial Application Portal';
 }
-
-const test = 'test';

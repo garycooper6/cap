@@ -10,7 +10,7 @@ import { ContractModule } from './contracts/contract.module';
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,

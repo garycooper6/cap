@@ -16,20 +16,10 @@ export class ContractDetailComponent implements OnInit {
     private contractService: ContractService) { }
 
   ngOnInit() {
-    const param = this.route.snapshot.paramMap.get('id');
-    if (param) {
-      const id = +param;
-      this.getContract(id);
-    }
-  }
-
-  getContract(id: number) {
-    this.contractService.getContract(id).subscribe(
-      contract => this.contract = contract,
-      error => this.errorMessage = <any>error);
+    this.contract = this.route.snapshot.data['contract'];
   }
 
   onBack(): void {
-    this.router.navigate(['/contracts']);
+    this.router.navigate(['/contracts'], { queryParamsHandling: 'preserve' });
   }
 }

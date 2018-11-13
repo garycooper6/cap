@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { ContractModule } from './contracts/contract.module';
+import { UserModule } from './user/user.module';
+import { MessageModule } from './messages/message.module';
+import { AppRoutingModule } from './user/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,10 @@ import { ContractModule } from './contracts/contract.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      { path: 'welcome', component: WelcomeComponent },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-      { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
-    ]),
-    ContractModule
+    ContractModule,
+    UserModule,
+    MessageModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

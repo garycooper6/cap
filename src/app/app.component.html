@@ -4,10 +4,24 @@
     <li class='nav-item'><a class='nav-link' routerLinkActive='active' [routerLink]="['/welcome']">Home</a>
     </li>
     <li class='nav-item'><a class='nav-link' routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}"
-        [routerLink]="['/contracts']">Product List</a>
+        [routerLink]="['/contracts']">Contract List</a>
     </li>
     <li class='nav-item'><a class='nav-link' routerLinkActive='active' [routerLinkActiveOptions]="{exact: true}"
-        [routerLink]="['/contracts/0/edit']">Add Product</a>
+        [routerLink]="['/contracts/0/edit']">Add Contract</a>
+    </li>
+  </ul>
+  <ul class="nav navbar-nav ml-auto">
+    <li class='nav-item' *ngIf="authService.isLoggedIn()">
+      <a class='nav-link'>Welcome {{authService.currentUser.userName}}</a>
+    </li>
+    <li class='nav-item'>
+      <a class='nav-link'>Show Messages</a>
+    </li>
+    <li class='nav-item' *ngIf="!authService.isLoggedIn()">
+      <a class='nav-link' [routerLink]="['/login']" routerLinkActive="active">Log In</a>
+    </li>
+    <li class='nav-item' *ngIf="authService.isLoggedIn()">
+      <a class='nav-link' (click)="logOut()" routerLinkActive="active">Log Out</a>
     </li>
   </ul>
 </nav>

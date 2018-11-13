@@ -9,20 +9,29 @@ import { ContractEditComponent } from './contract-edit.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ContractEditGuard } from './contract-edit.guard';
 
-
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { ContractData } from './contract-data';
+import { ContractResolver } from './contract-resolver.service';
 
 @NgModule({
   imports: [
     SharedModule,
     ReactiveFormsModule,
+    InMemoryWebApiModule.forRoot(ContractData, { delay: 1000 }),
     RouterModule.forChild([
       { path: 'contracts', component: ContractListComponent },
       {
         path: 'contracts/:id',
         canActivate: [ContractDetailGuard],
-        component: ContractDetailComponent
+        component: ContractDetailComponent,
+        resolve: { contract: ContractResolver }
       },
-      { path: 'contracts/:id/edit', canDeactivate: [ContractEditGuard], component: ContractEditComponent }
+      {
+        path: 'contracts/:id/edit',
+        canDeactivate: [ContractEditGuard],
+        component: ContractEditComponent,
+        resolve: { contract: ContractResolver }
+      }
     ])
   ],
   declarations: [

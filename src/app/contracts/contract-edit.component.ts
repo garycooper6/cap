@@ -34,7 +34,28 @@ export class ContractEditComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private contractService: ContractService) { }
+    private contractService: ContractService) {
+
+    // Defines all of the validation messages for the form.
+    // These could instead be retrieved from a file or database.
+    this.validationMessages = {
+      contractNumber: {
+        required: 'Contract number is required.'
+      },
+      details: {
+        required: 'Contract details is required.',
+        minlength: 'Contract details must be at least three characters.',
+        maxlength: 'Contract details cannot exceed 50 characters.'
+      },
+      starRating: {
+        range: 'Rate the contract between 1 (lowest) and 5 (highest).'
+      }
+    };
+
+    // Define an instance of the validator for use with this form,
+    // passing in this form's set of validation messages.
+    this.genericValidator = new GenericValidator(this.validationMessages);
+  }
 
   ngOnInit(): void {
     this.contractForm = this.fb.group({
@@ -47,16 +68,13 @@ export class ContractEditComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     // Read the contract Id from the route parameter
-    this.sub = this.route.paramMap.subscribe(
-      params => {
-        const id = +params.get('id');
-        this.getContract(id);
-      }
-    );
+    this.route.data.subscribe(data => {
+      this.displayContract(data['contract']);
+    });
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -108,5 +126,52 @@ export class ContractEditComponent implements OnInit, AfterViewInit, OnDestroy {
       starRating: this.contract.starRating
     });
     this.contractForm.setControl('tags', this.fb.array(this.contract.tags || []));
+  }
+
+  deleteContract(): void {
+    if (this.contract.id === 0) {
+      // Don't delete, it was never saved.
+      this.onSaveComplete();
+    } else {
+      if (confirm(`Really delete the contract: ${this.contract.contractNumber}?`)) {
+        this.contractService.deleteContract(this.contract.id)
+          .subscribe(
+            () => this.onSaveComplete(),
+            (error: any) => this.errorMessage = <any>error
+          );
+      }
+    }
+  }
+
+  saveContract(): void {
+    if (this.contractForm.valid) {
+      if (this.contractForm.dirty) {
+        const c = { ...this.contract, ...this.contractForm.value };
+
+        if (c.id === 0) {
+          this.contractService.createContract(c)
+            .subscribe(
+              () => this.onSaveComplete(),
+              (error: any) => this.errorMessage = <any>error
+            );
+        } else {
+          this.contractService.updateContract(c)
+            .subscribe(
+              () => this.onSaveComplete(),
+              (error: any) => this.errorMessage = <any>error
+            );
+        }
+      } else {
+        this.onSaveComplete();
+      }
+    } else {
+      this.errorMessage = 'Please correct the validation errors.';
+    }
+  }
+
+  onSaveComplete(): void {
+    // Reset the form to clear the flags
+    this.contractForm.reset();
+    this.router.navigate(['/contracts']);
   }
 }

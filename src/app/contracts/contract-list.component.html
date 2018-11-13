@@ -10,8 +10,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">@</span>
                 </div>
-                <input type="text" [(ngModel)]="listFilter" placeholder="Search..."
-                    aria-describedby="basic-addon1" />
+                <input type="text" [(ngModel)]="listFilter" placeholder="Search..." aria-describedby="basic-addon1" />
             </div>
         </div>
         <div class="row" *ngIf="listFilter">
@@ -44,7 +43,7 @@
                                 [style.width.px]="imageWidth" [style.margin.px]="imageMargin">
                         </td>
                         <td>
-                            <a [routerLink]="['/contracts', contract.id]">
+                            <a [routerLink]="['/contracts', contract.id]" [queryParams]="{filterBy: listFilter, showImage: showImage}">
                                 {{ contract.contractNumber }}
                             </a>
                         </td>

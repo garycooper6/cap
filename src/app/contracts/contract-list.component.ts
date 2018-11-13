@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IContract } from './contract';
 import { ContractService } from './contract.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './contract-list.component.html',
@@ -26,7 +27,7 @@ export class ContractListComponent implements OnInit {
     filteredContracts: IContract[];
     contracts: IContract[] = [];
 
-    constructor(private contractService: ContractService) {
+    constructor(private contractService: ContractService, private route: ActivatedRoute) {
     }
 
     performFilter(filterBy: string): IContract[] {
@@ -40,13 +41,16 @@ export class ContractListComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.contractService.getContracts().subscribe(
-            contracts => {
-                this.contracts = contracts;
-                this.filteredContracts = this.contracts;
+        this.listFilter = this.route.snapshot.queryParams['filterBy'] || '';
+        this.showImage = this.route.snapshot.queryParams['showImage'] === 'true';
+
+        this.contractService.getContracts()
+            .subscribe(contracts => {
+                this.contracts = contracts,
+                this.filteredContracts = this.performFilter(this.listFilter);
             },
-            error => this.errorMessage = <any>error
-        );
+                error => this.errorMessage = <any>error
+            );
     }
 
     onRatingClicked(message: string): void {

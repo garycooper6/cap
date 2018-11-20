@@ -14,7 +14,8 @@ export class ContractData implements InMemoryDbService {
                 'tenderValue': 175819.51,
                 'startDate': '09/02/2015',
                 'starRating': 2.8,
-                'imageUrl': 'https://openclipart.org/image/800px/svg_to_png/158773/Boton-correcto.png'
+                'imageUrl': 'https://openclipart.org/image/800px/svg_to_png/158773/Boton-correcto.png',
+                'tags': ['rake', 'leaf', 'yard', 'home']
             },
             {
                 'id': 2,
@@ -51,7 +52,7 @@ export class ContractData implements InMemoryDbService {
                 'contractNumber': 853,
                 'details': 'Winter Preparedness',
                 'status': '0',
-                'tenderValue': 0.60,
+                'tenderValue': 60000.60,
                 'startDate': '01/11/2017',
                 'starRating': 2.5,
                 'imageUrl': 'https://openclipart.org/image/800px/svg_to_png/158773/Boton-correcto.png'

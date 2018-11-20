@@ -10,7 +10,8 @@ import { NumberValidators } from '../shared/number.validator';
 import { GenericValidator } from '../shared/generic-validator';
 
 @Component({
-  templateUrl: './contract-edit.component.html'
+  templateUrl: './contract-edit.component.html',
+  styleUrls: ['./contract-edit.component.css']
 })
 export class ContractEditComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
